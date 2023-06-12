@@ -1,4 +1,0 @@
-{
-  "appService.defaultWebAppToDeploy": "/subscriptions/08d7cc48-f0dd-4d41-b0ef-a4002fd46274/resourceGroups/patna-tourism-api/providers/Microsoft.Web/sites/patna-tourism-api",
-  "appService.deploySubpath": "."
-}

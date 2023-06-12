@@ -39,7 +39,7 @@ const validateApiKey = (req, res, next) =>
   __awaiter(void 0, void 0, void 0, function* () {
     const apiKey = req.header("X-API-Key");
     // Check if API key exists in the database
-    const result = yield APIKeyModel.findOne({ apiKey });
+    const result = yield APIKeyModel.findOne({ key: apiKey });
     if (!result) {
       return res.status(401).json({ message: "Invalid API key" });
     }
