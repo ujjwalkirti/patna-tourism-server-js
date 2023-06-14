@@ -97,7 +97,9 @@ app.post("/get-api-key", ensureAuthenticated, (req, res) =>
       // Save the APIKey document to the database
       const apiKeyDocument = new APIKeyModel(newApiKey);
       const savedApiKey = yield apiKeyDocument.save();
-      return res.status(201).json(savedApiKey);
+      return res
+        .status(201)
+        .json({ message: "Successfully generated API Key.", savedApiKey });
     } catch (error) {
       return res
         .status(500)
@@ -107,8 +109,13 @@ app.post("/get-api-key", ensureAuthenticated, (req, res) =>
 );
 
 app.post("/add-email", async (req, res) => {
+  let user = await User.findOne({ email: req.body.email });
+  if (user) {
+    return res.status(200).json(user);
+  }
   try {
-    const newUser = new User(req.body.user);
+    console.log(req.body)
+    const newUser = new User(req.body);
     const savedUser = await newUser.save();
     return res.status(201).json(savedUser);
   } catch (error) {

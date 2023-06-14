@@ -49,12 +49,12 @@ const validateApiKey = (req, res, next) =>
 // Middleware to ensure user is authenticated
 async function ensureAuthenticated(req, res, next) {
   const email = req.body.email;
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email: email });
 
-  if (!user) {
-    return res.status(401).json({ error: "User is not authenticated" });
+  if (user) {
+    return next();
   }
   // User is not authenticated, send JSON response with error status
-  next();
+  return res.status(401).json({ error: "User is not authenticated" });
 }
 module.exports = { validateApiKey, ensureAuthenticated };
