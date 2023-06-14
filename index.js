@@ -114,7 +114,6 @@ app.post("/add-email", async (req, res) => {
     return res.status(200).json(user);
   }
   try {
-    console.log(req.body)
     const newUser = new User(req.body);
     const savedUser = await newUser.save();
     return res.status(201).json(savedUser);
